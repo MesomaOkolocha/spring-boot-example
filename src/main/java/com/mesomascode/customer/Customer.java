@@ -1,17 +1,33 @@
 package com.mesomascode.customer;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+import java.util.Objects;
+@Entity
 public class Customer{
+    @Id
+    @SequenceGenerator(name = "customer_id_sequence",
+    sequenceName = "customer_id_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+    generator = "customer_id_sequence")
     private Integer Id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private Integer age;
 
     public Customer() {}
 
     public Customer(Integer id, String name, String email, Integer age) {
         Id = id;
+        this.name = name;
+        this.email = email;
+        this.age = age;
+    }
+
+    public Customer(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
         this.age = age;
